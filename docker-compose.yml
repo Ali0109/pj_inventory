@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/pj_inventory
+    ports:
+      - 9000:9000
+    env_file:
+      - env/.env.local
+    command: python manage.py runserver 0.0.0.0:8100
+    networks:
+      - mysql-network
+
+networks:
+  mysql-network:
+    external:
+      name: mysql-network
